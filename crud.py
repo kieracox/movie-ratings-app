@@ -16,6 +16,9 @@ def create_movie(title, overview, release_date, poster_path):
 def return_all_movies():
     return Movie.query.all()
 
+def get_movie_by_id(movie_id):
+    return Movie.query.get(movie_id)
+
 def create_rating(user, movie, score):
     rating = Rating(user=user, movie=movie, score=score)
 
