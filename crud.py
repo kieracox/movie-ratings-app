@@ -8,6 +8,9 @@ def create_user(email, password):
 
     return user
 
+def return_all_users():
+    return User.query.all()
+
 def create_movie(title, overview, release_date, poster_path):
     movie = Movie(title=title, overview=overview, release_date=release_date, poster_path=poster_path)
 
