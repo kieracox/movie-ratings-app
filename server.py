@@ -35,6 +35,10 @@ def all_users():
     users = crud.return_all_users()
     return render_template('all_users.html', users=users)
 
+@app.route("/users", methods=["POST"])
+def register_user():
+    """Create a new user."""
+
 @app.route("/users/<user_id>")
 def show_user(user_id):
     """Show details on a particular user."""
