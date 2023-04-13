@@ -1,12 +1,12 @@
 """Server for movie ratings app."""
-
+# import external libraries and other python files
 from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db, db, User, Movie, Rating
 import crud
 
 from jinja2 import StrictUndefined
 
-
+#configure the Flask instance
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -75,6 +75,7 @@ def log_in_user():
 
 @app.route("/movies/<movie_id>/ratings", methods=["POST"])
 def create_rating(movie_id):
+    """Add a movie rating."""
     user_email = session["user_email"]
     user_rating = request.form.get("rating")
 
@@ -92,12 +93,14 @@ def create_rating(movie_id):
 
 @app.route("/update_rating", methods=["POST"])
 def update_rating():
+    """Update a movie rating."""
     rating_id = request.json["rating_id"]
     updated_score = request.json["updated_score"]
     crud.change_rating(rating_id, updated_score)
     db.session.commit()
     return "Success"
 
+#connect to db
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

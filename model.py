@@ -1,10 +1,11 @@
 """Models for movie ratings app."""
 
+#import SQLAlchemy, call it to create an instance (db variable)
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
+#creating User, Movie, Rating objects w/ columns
 class User(db.Model):
     __tablename__ = "users"
 
@@ -46,7 +47,7 @@ class Rating(db.Model):
         return f"<Rating rating_id={self.rating_id} score={self.score}>"
 
 
-
+#connect to the database
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo

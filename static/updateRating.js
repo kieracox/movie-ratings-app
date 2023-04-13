@@ -1,5 +1,6 @@
 editButtons = document.querySelectorAll('.edit-movie-rating');
 
+// add event listeners to each edit button, get the new score that the user inputs
 for (const button of editButtons) {
     button.addEventListener('click', () => {
         const newScore = prompt('What is your new score?')
