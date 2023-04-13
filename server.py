@@ -73,6 +73,23 @@ def log_in_user():
         flash(f"Welcome back, {user.email}!")
     return redirect("/")
 
+@app.route("/movies/<movie_id>/ratings", methods=["POST"])
+def create_rating(movie_id):
+    user_email = session["user_email"]
+    user_rating = request.form.get("rating")
+
+    if user_email is None:
+        flash("Please log in to rate your movie.")
+    else:
+        user = crud.get_user_by_email(user_email)
+        movie = crud.get_movie_by_id(movie_id)
+        rating = crud.create_rating(user, movie, int(user_rating))
+        db.session.add(rating)
+        db.session.commit()
+        flash(f"Movie rated! Your score is {user_rating}")
+    
+    return redirect(f"/movies/{movie_id}")
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
