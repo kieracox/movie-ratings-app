@@ -90,6 +90,14 @@ def create_rating(movie_id):
     
     return redirect(f"/movies/{movie_id}")
 
+@app.route("/update-rating", methods=["POST"])
+def update_rating():
+    rating_id = request.json["rating_id"]
+    new_rating = request.json["updated_score"]
+    Rating.update(rating_id, new_rating)
+    db.session.commit()
+    return "Success"
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
