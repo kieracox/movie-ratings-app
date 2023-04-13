@@ -33,6 +33,10 @@ def create_rating(user, movie, score):
 
     return rating
 
+def change_rating(rating_id, new_score):
+    rating = Rating.query.get(rating_id)
+    rating.score = new_score
+
 
 
 
