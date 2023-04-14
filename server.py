@@ -76,7 +76,7 @@ def log_in_user():
 @app.route("/movies/<movie_id>/ratings", methods=["POST"])
 def create_rating(movie_id):
     """Add a movie rating."""
-    user_email = session["user_email"]
+    user_email = session.get("user_email")
     user_rating = request.form.get("rating")
 
     if user_email is None:
